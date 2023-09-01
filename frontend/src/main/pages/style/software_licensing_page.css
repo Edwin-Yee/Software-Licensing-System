@@ -1,0 +1,91 @@
+/* Style for the entire product page */
+.product-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+.product-container {
+    background-color: lightblue;
+    display: flex;   
+    align-items: center;
+    padding: 10px;
+}
+
+.product-image {
+    width: 100%;
+    max-height: 30vh;
+    background-color: lightblue;
+    height: auto;
+    transition: max-height 0.5s ease-in-out; 
+}
+
+.product-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; /* Center-align the text content */
+}
+
+.product-header h2 {
+    font-size: 4vw; /* Adjust the font size using vw units */
+    margin: 10px 0;
+}
+  
+.product-header p {
+    font-size: 2.5vw; /* Adjust the font size using vw units */
+    margin: 0;
+}
+  
+@media (max-width: 768px) {
+    .product-header img {
+      max-height: 20vh; /* Adjust the maximum height for smaller screens */
+    }
+}
+  
+  /* Style for the columns */
+  .columns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+.left-column {
+    flex: 1;
+    padding: 10px;
+}
+  
+.right-column {
+    flex: 1;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+  
+.approvalForm {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.approvalForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.approvalForm input[type="text"],
+.approvalForm select {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.approvalForm button {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px; 
+}

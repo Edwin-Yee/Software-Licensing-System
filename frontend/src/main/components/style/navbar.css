@@ -1,0 +1,6 @@
+/* In your CSS or Styled Components */
+.nav-link {
+    color: white; /* Set your desired link color */
+    text-decoration: none; /* Remove default underline */
+  }
+  
