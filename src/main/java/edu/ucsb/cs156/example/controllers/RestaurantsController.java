@@ -59,11 +59,9 @@ public class RestaurantsController extends ApiController {
             @Parameter(name = "email") @RequestParam String email, 
             @Parameter(name = "department") @RequestParam String department, 
             @Parameter(name = "licenseAllocated") @RequestParam String licenseAllocated, 
-
             @Parameter(name = "licensePurchaseDate") @RequestParam LocalDateTime licensePurchaseDate, 
-            @Parameter(name = "licenseExpirationDate") @RequestParam LocalDateTime licenseExpirationDate, 
-                
-            ) {
+            @Parameter(name = "licenseExpirationDate") @RequestParam LocalDateTime licenseExpirationDate ) {
+        
         Restaurant restaurant = new Restaurant();
 
         restaurant.setName(name);
