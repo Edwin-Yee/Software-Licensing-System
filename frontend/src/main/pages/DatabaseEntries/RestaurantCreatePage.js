@@ -10,8 +10,12 @@ export default function DatabaseCreatePage({storybook=false}) {
     url: "/api/restaurants/post",
     method: "POST",
     params: {
-     name: restaurant.name,
-     description: restaurant.description
+      name: restaurant.name,
+      email: restaurant.email, 
+      department: restaurant.department, 
+      licenseAllocated: restaurant.licenseAllocated,
+      licensePurchaseDate: restaurant.licensePurchaseDate,
+      licenseExpirationDate: restaurant.licenseExpirationDate
     }
   });
 
