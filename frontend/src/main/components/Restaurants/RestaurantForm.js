@@ -20,10 +20,6 @@ function RestaurantForm({ initialContents, submitAction, buttonLabel = "Create" 
     // Stryker disable next-line Regex
     const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 
-    // Stryker disable next-line all
-    const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
-
-
     const testIdPrefix = "RestaurantForm";
 
     return (
@@ -110,36 +106,33 @@ function RestaurantForm({ initialContents, submitAction, buttonLabel = "Create" 
                     {errors.licenseAllocated?.message}
                 </Form.Control.Feedback>
             </Form.Group>
-
+            
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="licensePurchaseDate">License Purchase Date</Form.Label>
+                <Form.Label htmlFor="licensePurchaseDate">License Purchase Date)</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-licensePurchaseDate"}
                     id="licensePurchaseDate"
-                    type="text"
-                    isInvalid={Boolean(errors.email)}
-                    {...register("licensePurchaseDate", {
-                        required: "License Purchase Date is required."
-                    })}
+                    type="datetime-local"
+                    isInvalid={Boolean(errors.localDateTime)}
+                    {...register("licensePurchaseDate", { required: true, pattern: isodate_regex })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.licensePurchaseDate?.message}
+                    {errors.localDateTime && 'License Purchase Date is required. '}
                 </Form.Control.Feedback>
             </Form.Group>
 
+
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="licenseExpirationDate">License Expiration Date</Form.Label>
+                <Form.Label htmlFor="licenseExpirationDate">License Expiration Date)</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-licenseExpirationDate"}
                     id="licenseExpirationDate"
-                    type="text"
-                    isInvalid={Boolean(errors.email)}
-                    {...register("licenseExpirationDate", {
-                        required: "License Expiration Date is required."
-                    })}
+                    type="datetime-local"
+                    isInvalid={Boolean(errors.localDateTime)}
+                    {...register("licenseExpirationDate", { required: true, pattern: isodate_regex })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.licenseExpirationDate?.message}
+                    {errors.localDateTime && 'License Expiration Date is required. '}
                 </Form.Control.Feedback>
             </Form.Group>
 
