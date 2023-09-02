@@ -40,9 +40,25 @@ export default function RestaurantTable({
             accessor: 'name',
         },
         {
-            Header: 'Description',
-            accessor: 'description',
-        }
+            Header: 'Email',
+            accessor: 'email',
+        },
+        {
+            Header: 'Department',
+            accessor: 'department',
+        },
+        {
+            Header: 'License Allocated',
+            accessor: 'licenseAllocated',
+        },
+        {
+            Header: 'License Purchase Date',
+            accessor: 'licensePurchaseDate',
+        },
+        {
+            Header: 'License Expiration Date',
+            accessor: 'licenseExpirationDate',
+        },
     ];
 
     if (hasRole(currentUser, "ROLE_ADMIN")) {
