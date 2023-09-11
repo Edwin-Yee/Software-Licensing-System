@@ -131,7 +131,7 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                             )
                         } */}
                       <nav className = "nav-link">
-                        <Nav.Link as={Link} to="/restaurants">Database</Nav.Link>
+                        <Nav.Link as={Link} to="/database_entries">Database</Nav.Link>
 
                         {
                             systemInfo?.showSwaggerUILink && (

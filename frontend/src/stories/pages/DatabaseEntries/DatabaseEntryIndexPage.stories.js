@@ -1,17 +1,17 @@
 import React from 'react';
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-import { restaurantFixtures } from "fixtures/databaseEntriesFixtures";
+import { databaseEntryFixtures } from "fixtures/databaseEntriesFixtures";
 import { rest } from "msw";
 
-import RestaurantIndexPage from "main/pages/DatabaseEntries/RestaurantIndexPage";
+import DatabaseEntryIndexPage from "main/pages/DatabaseEntries/DatabaseEntryIndexPage";
 
 export default {
-    title: 'pages/Restaurants/RestaurantIndexPage',
-    component: RestaurantIndexPage
+    title: 'pages/DatabaseEntries/DatabaseEntryIndexPage',
+    component: DatabaseEntryIndexPage
 };
 
-const Template = () => <RestaurantIndexPage storybook={true}/>;
+const Template = () => <DatabaseEntryIndexPage storybook={true}/>;
 
 export const Empty = Template.bind({});
 Empty.parameters = {
@@ -22,7 +22,7 @@ Empty.parameters = {
         rest.get('/api/systemInfo', (_req, res, ctx) => {
             return res(ctx.json(systemInfoFixtures.showingNeither));
         }),
-        rest.get('/api/restaurants/all', (_req, res, ctx) => {
+        rest.get('/api/database_entries/all', (_req, res, ctx) => {
             return res(ctx.json([]));
         }),
     ]
@@ -38,8 +38,8 @@ ThreeItemsOrdinaryUser.parameters = {
         rest.get('/api/systemInfo', (_req, res, ctx) => {
             return res(ctx.json(systemInfoFixtures.showingNeither));
         }),
-        rest.get('/api/restaurants/all', (_req, res, ctx) => {
-            return res(ctx.json(restaurantFixtures.threeRestaurants));
+        rest.get('/api/database_entries/all', (_req, res, ctx) => {
+            return res(ctx.json(databaseEntryFixtures.threeDatabaseEntries));
         }),
     ],
 }
@@ -54,10 +54,10 @@ ThreeItemsAdminUser.parameters = {
         rest.get('/api/systemInfo', (_req, res, ctx) => {
             return res(ctx.json(systemInfoFixtures.showingNeither));
         }),
-        rest.get('/api/restaurants/all', (_req, res, ctx) => {
-            return res(ctx.json(restaurantFixtures.threeRestaurants));
+        rest.get('/api/database_entries/all', (_req, res, ctx) => {
+            return res(ctx.json(databaseEntryFixtures.threeDatabaseEntries));
         }),
-        rest.delete('/api/restaurants', (req, res, ctx) => {
+        rest.delete('/api/database_entries', (req, res, ctx) => {
             window.alert("DELETE: " + JSON.stringify(req.url));
             return res(ctx.status(200),ctx.json({}));
         }),

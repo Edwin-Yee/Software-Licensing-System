@@ -1,8 +1,8 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import RestaurantForm from "main/components/Restaurants/RestaurantForm";
-import { restaurantFixtures } from "fixtures/databaseEntriesFixtures";
+import DatabaseEntryForm from "main/components/DatabaseEntries/DatabaseEntryForm";
+import { databaseEntryFixtures } from "fixtures/databaseEntriesFixtures";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -13,17 +13,17 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
-describe("RestaurantForm tests", () => {
+describe("DatabaseEntryForm tests", () => {
     const queryClient = new QueryClient();
 
-    const expectedHeaders = ["Name", "Description"];
-    const testId = "RestaurantForm";
+    const expectedHeaders = ["Name", "Email", "Department", "License Allocated", "License Purchase Date", "License Expiration Date"];
+    const testId = "DatabaseEntryForm";
 
     test("renders correctly with no initialContents", async () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <Router>
-                    <RestaurantForm />
+                    <DatabaseEntryForm />
                 </Router>
             </QueryClientProvider>
         );
@@ -41,7 +41,7 @@ describe("RestaurantForm tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <Router>
-                    <RestaurantForm initialContents={restaurantFixtures.oneRestaurant} />
+                    <DatabaseEntryForm initialContents={databaseEntryFixtures.oneDatabaseEntry} />
                 </Router>
             </QueryClientProvider>
         );
@@ -62,7 +62,7 @@ describe("RestaurantForm tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <Router>
-                    <RestaurantForm />
+                    <DatabaseEntryForm />
                 </Router>
             </QueryClientProvider>
         );
@@ -78,7 +78,7 @@ describe("RestaurantForm tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <Router>
-                    <RestaurantForm />
+                    <DatabaseEntryForm />
                 </Router>
             </QueryClientProvider>
         );
@@ -88,7 +88,11 @@ describe("RestaurantForm tests", () => {
         fireEvent.click(submitButton);
 
         await screen.findByText(/Name is required/);
-        expect(screen.getByText(/Description is required/)).toBeInTheDocument();
+        expect(screen.getByText(/Email is required/)).toBeInTheDocument();
+        expect(screen.getByText(/Department is required/)).toBeInTheDocument();
+        expect(screen.getByText(/License Allocated is required/)).toBeInTheDocument();
+        expect(screen.getByText(/License Purcahse Date is required/)).toBeInTheDocument();
+        expect(screen.getByText(/License Expiration Date is required/)).toBeInTheDocument();
 
         const nameInput = screen.getByTestId(`${testId}-name`);
         fireEvent.change(nameInput, { target: { value: "a".repeat(31) } });

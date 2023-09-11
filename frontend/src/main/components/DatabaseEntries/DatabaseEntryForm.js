@@ -2,7 +2,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 
-function RestaurantForm({ initialContents, submitAction, buttonLabel = "Create" }) {
+function DatabaseEntryForm({ initialContents, submitAction, buttonLabel = "Create" }) {
 
     
     // Stryker disable all
@@ -20,7 +20,7 @@ function RestaurantForm({ initialContents, submitAction, buttonLabel = "Create" 
     // Stryker disable next-line Regex
     const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 
-    const testIdPrefix = "RestaurantForm";
+    const testIdPrefix = "DatabaseEntryForm";
 
     return (
         <Form onSubmit={handleSubmit(submitAction)}>
@@ -108,7 +108,7 @@ function RestaurantForm({ initialContents, submitAction, buttonLabel = "Create" 
             </Form.Group>
             
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="licensePurchaseDate">License Purchase Date)</Form.Label>
+                <Form.Label htmlFor="licensePurchaseDate">License Purchase Date</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-licensePurchaseDate"}
                     id="licensePurchaseDate"
@@ -123,7 +123,7 @@ function RestaurantForm({ initialContents, submitAction, buttonLabel = "Create" 
 
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="licenseExpirationDate">License Expiration Date)</Form.Label>
+                <Form.Label htmlFor="licenseExpirationDate">License Expiration Date</Form.Label>
                 <Form.Control
                     data-testid={testIdPrefix + "-licenseExpirationDate"}
                     id="licenseExpirationDate"
@@ -155,4 +155,4 @@ function RestaurantForm({ initialContents, submitAction, buttonLabel = "Create" 
     )
 }
 
-export default RestaurantForm;
+export default DatabaseEntryForm;

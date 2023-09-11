@@ -1,21 +1,21 @@
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
-import RestaurantForm from "main/components/Restaurants/RestaurantForm";
+import DatabaseEntryForm from "main/components/DatabaseEntries/DatabaseEntryForm";
 import { Navigate } from 'react-router-dom'
 import { useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
 export default function DatabaseCreatePage({storybook=false}) {
 
-  const objectToAxiosParams = (restaurant) => ({
-    url: "/api/restaurants/post",
+  const objectToAxiosParams = (database_entry) => ({
+    url: "/api/database_entries/post",
     method: "POST",
     params: {
-      name: restaurant.name,
-      email: restaurant.email, 
-      department: restaurant.department, 
-      licenseAllocated: restaurant.licenseAllocated,
-      licensePurchaseDate: restaurant.licensePurchaseDate,
-      licenseExpirationDate: restaurant.licenseExpirationDate
+      name: database_entry.name,
+      email: database_entry.email, 
+      department: database_entry.department, 
+      licenseAllocated: database_entry.licenseAllocated,
+      licensePurchaseDate: database_entry.licensePurchaseDate,
+      licenseExpirationDate: database_entry.licenseExpirationDate
     }
   });
 
@@ -27,7 +27,7 @@ export default function DatabaseCreatePage({storybook=false}) {
     objectToAxiosParams,
      { onSuccess }, 
      // Stryker disable next-line all : hard to set up test for caching
-     ["/api/restaurants/all"] // mutation makes this key stale so that pages relying on it reload
+     ["/api/database_entries/all"] // mutation makes this key stale so that pages relying on it reload
      );
 
   const { isSuccess } = mutation
@@ -37,14 +37,14 @@ export default function DatabaseCreatePage({storybook=false}) {
   }
 
   if (isSuccess && !storybook) {
-    return <Navigate to="/restaurants" />
+    return <Navigate to="/database_entries" />
   }
 
   return (
     <BasicLayout>
       <div className="pt-2">
         <h1>Create New Database Entry</h1>
-        <RestaurantForm submitAction={onSubmit} />
+        <DatabaseEntryForm submitAction={onSubmit} />
       </div>
     </BasicLayout>
   )

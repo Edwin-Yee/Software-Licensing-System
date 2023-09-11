@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity(name = "restaurant")
-public class Restaurant {
+@Entity(name = "database_entry")
+public class DatabaseEntry {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;

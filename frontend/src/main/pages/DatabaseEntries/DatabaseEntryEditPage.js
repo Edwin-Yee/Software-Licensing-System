@@ -1,47 +1,51 @@
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import { useParams } from "react-router-dom";
-import RestaurantForm from 'main/components/Restaurants/RestaurantForm';
+import DatabaseEntryForm from 'main/components/DatabaseEntries/DatabaseEntryForm';
 import { Navigate } from 'react-router-dom'
 import { useBackend, useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
-export default function RestaurantEditPage({storybook=false}) {
+export default function DatabaseEntryEditPage({storybook=false}) {
     let { id } = useParams();
 
-    const { data: restaurant, _error, _status } =
+    const { data: database_entry, _error, _status } =
         useBackend(
             // Stryker disable next-line all : don't test internal caching of React Query
-            [`/api/restaurants?id=${id}`],
+            [`/api/database_entries?id=${id}`],
             {  // Stryker disable next-line all : GET is the default, so mutating this to "" doesn't introduce a bug
                 method: "GET",
-                url: `/api/restaurants`,
+                url: `/api/database_entries`,
                 params: {
                     id
                 }
             }
         );
 
-    const objectToAxiosPutParams = (restaurant) => ({
-        url: "/api/restaurants",
+    const objectToAxiosPutParams = (database_entry) => ({
+        url: "/api/database_entries",
         method: "PUT",
         params: {
-            id: restaurant.id,
+            id: database_entry.id,
         },
         data: {
-            name: restaurant.name,
-            description: restaurant.description,
+            name: database_entry.name,
+            email: database_entry.email, 
+            department: database_entry.department,
+            license_allocated: database_entry.license_allocated,
+            license_purchase_date: database_entry.license_purchase_date,
+            license_expiration_date: database_entry.license_expiration_date,
         }
     });
 
-    const onSuccess = (restaurant) => {
-        toast(`Restaurant Updated - id: ${restaurant.id} name: ${restaurant.name}`);
+    const onSuccess = (database_entry) => {
+        toast(`Datbase Entry Updated - id: ${database_entry.id} name: ${database_entry.name}`);
     }
 
     const mutation = useBackendMutation(
         objectToAxiosPutParams,
         { onSuccess },
         // Stryker disable next-line all : hard to set up test for caching
-        [`/api/restaurants?id=${id}`]
+        [`/api/database_entries?id=${id}`]
     );
 
     const { isSuccess } = mutation
@@ -51,15 +55,15 @@ export default function RestaurantEditPage({storybook=false}) {
     }
 
     if (isSuccess && !storybook) {
-        return <Navigate to="/restaurants" />
+        return <Navigate to="/database_entries" />
     }
 
     return (
         <BasicLayout>
             <div className="pt-2">
-                <h1>Edit Restaurant</h1>
+                <h1>Edit Database Entry</h1>
                 {
-                    restaurant && <RestaurantForm submitAction={onSubmit} buttonLabel={"Update"} initialContents={restaurant} />
+                    database_entry && <DatabaseEntryForm submitAction={onSubmit} buttonLabel={"Update"} initialContents={database_entry} />
                 }
             </div>
         </BasicLayout>

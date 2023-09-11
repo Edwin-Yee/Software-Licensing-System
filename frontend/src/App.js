@@ -7,9 +7,9 @@ import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
 import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
 import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
 
-import RestaurantIndexPage from "main/pages/DatabaseEntries/RestaurantIndexPage";
-import RestaurantCreatePage from "main/pages/DatabaseEntries/RestaurantCreatePage";
-import RestaurantEditPage from "main/pages/DatabaseEntries/RestaurantEditPage";
+import DatabaseEntryIndexPage from "main/pages/DatabaseEntries/DatabaseEntryIndexPage";
+import DatabaseEntryCreatePage from "main/pages/DatabaseEntries/DatabaseEntryCreatePage";
+import DatabaseEntryEditPage from "main/pages/DatabaseEntries/DatabaseEntryEditPage";
 
 import PlaceholderIndexPage from "main/pages/Placeholder/PlaceholderIndexPage";
 import PlaceholderCreatePage from "main/pages/Placeholder/PlaceholderCreatePage";
@@ -59,15 +59,15 @@ function App() {
                 {
                     hasRole(currentUser, "ROLE_USER") && (
                         <>
-                            <Route exact path="/restaurants" element={<RestaurantIndexPage />} />
+                            <Route exact path="/database_entries" element={<DatabaseEntryIndexPage />} />
                         </>
                     )
                 }
                 {
                     hasRole(currentUser, "ROLE_ADMIN") && (
                         <>
-                            <Route exact path="/restaurants/edit/:id" element={<RestaurantEditPage />} />
-                            <Route exact path="/restaurants/create" element={<RestaurantCreatePage />} />
+                            <Route exact path="/database_entries/edit/:id" element={<DatabaseEntryEditPage />} />
+                            <Route exact path="/database_entries/create" element={<DatabaseEntryCreatePage />} />
                         </>
                     )
                 }

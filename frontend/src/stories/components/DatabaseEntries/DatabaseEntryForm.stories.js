@@ -1,15 +1,15 @@
 import React from 'react';
-import RestaurantForm from "main/components/Restaurants/RestaurantForm"
-import { restaurantFixtures } from 'fixtures/databaseEntriesFixtures';
+import DatabaseEntryForm from "main/components/DatabaseEntries/DatabaseEntryForm"
+import { databaseEntryFixtures } from 'fixtures/databaseEntriesFixtures';
 
 export default {
-    title: 'components/Restaurants/RestaurantForm',
-    component: RestaurantForm
+    title: 'components/DatabaseEntries/DatabaseEntryForm',
+    component: DatabaseEntryForm
 };
 
 const Template = (args) => {
     return (
-        <RestaurantForm {...args} />
+        <DatabaseEntryForm {...args} />
     )
 };
 
@@ -26,7 +26,7 @@ Create.args = {
 export const Update = Template.bind({});
 
 Update.args = {
-    initialContents: restaurantFixtures.oneRestaurant[0],
+    initialContents: databaseEntryFixtures.oneDatabaseEntry[0],
     buttonLabel: "Update",
     submitAction: (data) => {
         console.log("Submit was clicked with data: ", data); 

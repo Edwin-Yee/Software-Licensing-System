@@ -1,42 +1,42 @@
 import React from 'react';
-import RestaurantTable from 'main/components/Restaurants/RestaurantTable';
-import { restaurantFixtures } from 'fixtures/databaseEntriesFixtures';
+import DatabaseEntryTable from 'main/components/DatabaseEntries/DatabaseEntryTable';
+import { databaseEntryFixtures } from 'fixtures/databaseEntriesFixtures';
 import { currentUserFixtures } from 'fixtures/currentUserFixtures';
 import { rest } from "msw";
 
 export default {
-    title: 'components/Restaurants/RestaurantTable',
-    component: RestaurantTable
+    title: 'components/DatabaseEntries/DatabaseEntryTable',
+    component: DatabaseEntryTable
 };
 
 const Template = (args) => {
     return (
-        <RestaurantTable {...args} />
+        <DatabaseEntryTable {...args} />
     )
 };
 
 export const Empty = Template.bind({});
 
 Empty.args = {
-    restaurants: []
+    database_entries: []
 };
 
 export const ThreeItemsOrdinaryUser = Template.bind({});
 
 ThreeItemsOrdinaryUser.args = {
-    restaurants: restaurantFixtures.threeRestaurants,
+    database_entries: databaseEntryFixtures.threeDatabaseEntries,
     currentUser: currentUserFixtures.userOnly,
 };
 
 export const ThreeItemsAdminUser = Template.bind({});
 ThreeItemsAdminUser.args = {
-    restaurants: restaurantFixtures.threeRestaurants,
+    database_entries: databaseEntryFixtures.threeDatabaseEntries,
     currentUser: currentUserFixtures.adminUser,
 }
 
 ThreeItemsAdminUser.parameters = {
     msw: [
-        rest.delete('/api/restaurants', (req, res, ctx) => {
+        rest.delete('/api/database_entries', (req, res, ctx) => {
             window.alert("DELETE: " + JSON.stringify(req.url));
             return res(ctx.status(200),ctx.json({}));
         }),

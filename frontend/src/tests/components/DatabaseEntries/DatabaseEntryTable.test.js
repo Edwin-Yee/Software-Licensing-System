@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
-import { restaurantFixtures } from "fixtures/databaseEntriesFixtures";
-import RestaurantTable from "main/components/Restaurants/RestaurantTable";
+import { databaseEntryFixtures } from "fixtures/databaseEntriesFixtures";
+import DatabaseEntryTable from "main/components/DatabaseEntries/DatabaseEntryTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -13,12 +13,12 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockedNavigate
 }));
 
-describe("RestaurantTable tests", () => {
+describe("DatabaseEntryTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["id", "Name", "Description"];
-  const expectedFields = ["id", "name", "description"];
-  const testId = "RestaurantTable";
+  const expectedHeaders = ["id", "Name", "Email", "Department", "License Allocated", "License Purchase Date", "License Expiration Date"];
+  const expectedFields = ["id", "name", "email", 'department', "license_allocated", "license_purchase_date", "license_expiration_date"];
+  const testId = "DatabaseEntryTable";
 
   test("renders empty table correctly", () => {
     
@@ -29,7 +29,7 @@ describe("RestaurantTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RestaurantTable restaurants={[]} currentUser={currentUser} />
+          <DatabaseEntryTable database_entries={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -54,7 +54,7 @@ describe("RestaurantTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RestaurantTable restaurants={restaurantFixtures.threeRestaurants} currentUser={currentUser} />
+          <DatabaseEntryTable database_entries={databaseEntryFixtures.threeDatabaseEntries} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -94,7 +94,7 @@ describe("RestaurantTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RestaurantTable restaurants={restaurantFixtures.threeRestaurants} currentUser={currentUser} />
+          <DatabaseEntryTable database_entries={databaseEntryFixtures.threeDatabaseEntries} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -129,7 +129,7 @@ describe("RestaurantTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RestaurantTable restaurants={restaurantFixtures.threeRestaurants} currentUser={currentUser} />
+          <DatabaseEntryTable database_entries={databaseEntryFixtures.threeDatabaseEntries} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -145,7 +145,7 @@ describe("RestaurantTable tests", () => {
     fireEvent.click(editButton);
 
     // assert - check that the navigate function was called with the expected path
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/restaurants/edit/2'));
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/database_entries/edit/2'));
 
   });
 
@@ -157,7 +157,7 @@ describe("RestaurantTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RestaurantTable restaurants={restaurantFixtures.threeRestaurants} currentUser={currentUser} />
+          <DatabaseEntryTable database_entries={databaseEntryFixtures.threeDatabaseEntries} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );

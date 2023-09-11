@@ -2,19 +2,19 @@ import React from "react";
 import OurTable, { ButtonColumn } from "main/components/OurTable";
 
 import { useBackendMutation } from "main/utils/useBackend";
-import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/restaurantUtils"
+import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/databaseEntryUtils"
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
-export default function RestaurantTable({
-    restaurants,
+export default function DatabaseEntryTable({
+    database_entries,
     currentUser,
-    testIdPrefix = "RestaurantTable" }) {
+    testIdPrefix = "DatabaseEntryTable" }) {
 
     const navigate = useNavigate();
 
     const editCallback = (cell) => {
-        navigate(`/restaurants/edit/${cell.row.values.id}`)
+        navigate(`/database_entries/edit/${cell.row.values.id}`)
     }
 
     // Stryker disable all : hard to test for query caching
@@ -22,7 +22,7 @@ export default function RestaurantTable({
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
         { onSuccess: onDeleteSuccess },
-        ["/api/restaurants/all"]
+        ["/api/database_entries/all"]
     );
     // Stryker restore all 
 
@@ -67,7 +67,7 @@ export default function RestaurantTable({
     } 
 
     return <OurTable
-        data={restaurants}
+        data={database_entries}
         columns={columns}
         testid={testIdPrefix}
     />;

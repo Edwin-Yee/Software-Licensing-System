@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import RestaurantCreatePage from "main/pages/DatabaseEntries/RestaurantCreatePage";
+import DatabaseEntriesCreatePage from "main/pages/DatabaseEntries/DatabaseEntryCreatePage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 
@@ -29,7 +29,7 @@ jest.mock('react-router-dom', () => {
     };
 });
 
-describe("RestaurantCreatePage tests", () => {
+describe("DatabaseEntriesCreatePage tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
 
@@ -46,27 +46,31 @@ describe("RestaurantCreatePage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <RestaurantCreatePage />
+                    <DatabaseEntriesCreatePage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
     });
 
-    test("on submit, makes request to backend, and redirects to /restaurants", async () => {
+    test("on submit, makes request to backend, and redirects to /database_entries", async () => {
 
         const queryClient = new QueryClient();
-        const restaurant = {
+        const database_entry = {
             id: 3,
-            name: "South Coast Deli",
-            description: "Sandwiches and Salads"
+            name: "Starfish",
+            email: "starfish@ucsb.edu",
+            department: "Math",
+            license_allocated: "Adobe Photoshop",
+            license_purchase_date: "2023-09-21T15:31:00",
+            license_expiration_date: "2023-09-21T15:31:01",
         };
 
-        axiosMock.onPost("/api/restaurants/post").reply(202, restaurant);
+        axiosMock.onPost("/api/database_entries/post").reply(202, database_entry);
 
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <RestaurantCreatePage />
+                    <DatabaseEntriesCreatePage />
                 </MemoryRouter>
             </QueryClientProvider>
         )
@@ -78,26 +82,46 @@ describe("RestaurantCreatePage tests", () => {
         const nameInput = screen.getByLabelText("Name");
         expect(nameInput).toBeInTheDocument();
 
-        const descriptionInput = screen.getByLabelText("Description");
-        expect(descriptionInput).toBeInTheDocument();
+        const emailInput = screen.getByLabelText("Email");
+        expect(emailInput).toBeInTheDocument();
+
+        const departmentInput = screen.getByLabelText("Department");
+        expect(departmentInput).toBeInTheDocument();
+
+        const licenseAllocatedInput = screen.getByLabelText("License Allocated");
+        expect(licenseAllocatedInput).toBeInTheDocument();
+
+        const licensePurchaseDateInput = screen.getByLabelText("License Purchase Date");
+        expect(licensePurchaseDateInput).toBeInTheDocument();
+
+        const licenseExpirationDateInput = screen.getByLabelText("License Expiration Date");
+        expect(licenseExpirationDateInput).toBeInTheDocument();
 
         const createButton = screen.getByText("Create");
         expect(createButton).toBeInTheDocument();
 
-        fireEvent.change(nameInput, { target: { value: 'South Coast Deli' } })
-        fireEvent.change(descriptionInput, { target: { value: 'Sandwiches and Salads' } })
+        fireEvent.change(nameInput, { target: { value: 'Starfish' } })
+        fireEvent.change(emailInput, { target: { value: 'new_starfish_account@ucsb.edu' } })
+        fireEvent.change(departmentInput, { target: { value: 'Biology' } })
+        fireEvent.change(licenseAllocatedInput, { target: { value: 'Adobe Illustrator' } })
+        fireEvent.change(licensePurchaseDateInput, { target: { value: '2024-09-21T15:31:00' } })
+        fireEvent.change(licenseExpirationDateInput, { target: { value: '2024-09-21T15:32:00' } })
         fireEvent.click(createButton);
 
         await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 
         expect(axiosMock.history.post[0].params).toEqual({
-            name: "South Coast Deli",
-            description: "Sandwiches and Salads"
+            name: "Starfish",
+            email: "new_starfish_account@ucsb.edu",
+            department: "Biology",
+            license_allocated: "Adobe Illustrator",
+            license_purchase_date: "2024-09-21T15:31:00",
+            license_expiration_date: "2024-09-21T15:32:00",
         });
 
         // assert - check that the toast was called with the expected message
-        expect(mockToast).toBeCalledWith("New restaurant Created - id: 3 name: South Coast Deli");
-        expect(mockNavigate).toBeCalledWith({ "to": "/restaurants" });
+        expect(mockToast).toBeCalledWith("New Database Entry Created - id: 3 name: Starfish");
+        expect(mockNavigate).toBeCalledWith({ "to": "/database_entries" });
 
     });
 });
