@@ -31,14 +31,14 @@ export default function DatabaseEntryEditPage({storybook=false}) {
             name: database_entry.name,
             email: database_entry.email, 
             department: database_entry.department,
-            license_allocated: database_entry.license_allocated,
-            license_purchase_date: database_entry.license_purchase_date,
-            license_expiration_date: database_entry.license_expiration_date,
+            licenseAllocated: database_entry.licenseAllocated,
+            licensePurchaseDate: database_entry.licensePurchaseDate,
+            licenseExpirationDate: database_entry.licenseExpirationDate,
         }
     });
 
     const onSuccess = (database_entry) => {
-        toast(`Datbase Entry Updated - id: ${database_entry.id} name: ${database_entry.name}`);
+        toast(`Database Entry Updated - id: ${database_entry.id} name: ${database_entry.name}`);
     }
 
     const mutation = useBackendMutation(

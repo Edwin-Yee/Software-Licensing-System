@@ -58,7 +58,7 @@ describe("DatabaseEntryEditPage tests", () => {
                     </MemoryRouter>
                 </QueryClientProvider>
             );
-            await screen.findByText("Edit DatabaseEntry");
+            await screen.findByText("Edit Database Entry");
             expect(screen.queryByTestId("DatabaseEntry-name")).not.toBeInTheDocument();
             restoreConsole();
         });
@@ -78,18 +78,18 @@ describe("DatabaseEntryEditPage tests", () => {
                 name: "Seaweed",
                 email: "seaweed@ucsb.edu",
                 department: "Art",
-                license_allocated: "Adobe Acrobat",
-                license_purchase_date: "2024-09-21T15:32:00",
-                license_expiration_date: "2024-09-21T15:33:00",
+                licenseAllocated: "Adobe Acrobat",
+                licensePurchaseDate: "2024-09-21T15:32",
+                licenseExpirationDate: "2024-09-21T15:33",
             });
             axiosMock.onPut('/api/database_entries').reply(200, {
                 id: "17",
                 name: "Seaweed2",
                 email: "seaweed2@ucsb.edu",
                 department: "Art2",
-                license_allocated: "Adobe Acrobat2",
-                license_purchase_date: "2024-09-21T15:32:01",
-                license_expiration_date: "2024-09-21T15:33:02",
+                licenseAllocated: "Adobe Acrobat2",
+                licensePurchaseDate: "2024-09-21T15:33",
+                licenseExpirationDate: "2024-09-21T15:34",
             });
         });
 
@@ -128,9 +128,9 @@ describe("DatabaseEntryEditPage tests", () => {
             expect(licenseAllocatedField).toBeInTheDocument(); 
             expect(licenseAllocatedField).toHaveValue("Adobe Acrobat");
             expect(licensePurchaseDateField).toBeInTheDocument();
-            expect(licensePurchaseDateField).toHaveValue("2024-09-21T15:32:00");
+            expect(licensePurchaseDateField).toHaveValue("2024-09-21T15:32");
             expect(licenseExpirationDateField).toBeInTheDocument();
-            expect(licenseExpirationDateField).toHaveValue("2024-09-21T15:33:00");
+            expect(licenseExpirationDateField).toHaveValue("2024-09-21T15:33");
 
             expect(submitButton).toHaveTextContent("Update");
             
@@ -138,13 +138,13 @@ describe("DatabaseEntryEditPage tests", () => {
             fireEvent.change(emailField, { target: { value: 'seaweed2@ucsb.edu' } });
             fireEvent.change(departmentField, { target: { value: 'Art2' } });
             fireEvent.change(licenseAllocatedField, { target: { value: 'Adobe Acrobat2' } });
-            fireEvent.change(licensePurchaseDateField, { target: { value: '2025-10-22T15:32:00' } });
-            fireEvent.change(licenseExpirationDateField, { target: { value: '2026-10-22T15:32:00' } });
+            fireEvent.change(licensePurchaseDateField, { target: { value: '2025-10-22T15:33' } });
+            fireEvent.change(licenseExpirationDateField, { target: { value: '2026-10-22T15:34' } });
 
             fireEvent.click(submitButton);
 
             await waitFor(() => expect(mockToast).toBeCalled());
-            expect(mockToast).toBeCalledWith("DatabaseEntry Updated - id: 17 name: Seaweed2");
+            expect(mockToast).toBeCalledWith("Database Entry Updated - id: 17 name: Seaweed2");
             
             expect(mockNavigate).toBeCalledWith({ "to": "/database_entries" });
 
@@ -152,11 +152,11 @@ describe("DatabaseEntryEditPage tests", () => {
             expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
             expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
                 name: 'Seaweed2',
-                email: 'seaweed2ucsb.edu',
+                email: 'seaweed2@ucsb.edu',
                 department: 'Art2',
                 licenseAllocated: 'Adobe Acrobat2',
-                licensePurchaseDate: '2025-10-22T15:32:00',
-                licenseExpirationDate: '2026-10-22T15:32:00'
+                licensePurchaseDate: '2025-10-22T15:33',
+                licenseExpirationDate: '2026-10-22T15:34'
             })); // posted object
 
 
@@ -178,11 +178,12 @@ describe("DatabaseEntryEditPage tests", () => {
             const nameField = screen.getByTestId("DatabaseEntryForm-name");
             const emailField = screen.getByTestId("DatabaseEntryForm-email");
             const departmentField = screen.getByTestId("DatabaseEntryForm-department");
-            const licenseAllocatedField = screen.getByTestId("DatabaseEntryForm-licenseAllocatedField");
-            const licensePurchaseDateField = screen.getByTestId("DatabaseEntryForm-licensePurchaseDateField");
-            const licenseExpirationDateField = screen.getByTestId("DatabaseEntryForm-licenseExpirationDateField");
+            const licenseAllocatedField = screen.getByTestId("DatabaseEntryForm-licenseAllocated");
+            const licensePurchaseDateField = screen.getByTestId("DatabaseEntryForm-licensePurchaseDate");
+            const licenseExpirationDateField = screen.getByTestId("DatabaseEntryForm-licenseExpirationDate");
 
             const submitButton = screen.getByTestId("DatabaseEntryForm-submit");
+            
 
             expect(idField).toHaveValue("17");
 
@@ -190,8 +191,8 @@ describe("DatabaseEntryEditPage tests", () => {
             expect(emailField).toHaveValue("seaweed@ucsb.edu");
             expect(departmentField).toHaveValue("Art");
             expect(licenseAllocatedField).toHaveValue("Adobe Acrobat");
-            expect(licensePurchaseDateField).toHaveValue("2024-09-21T15:32:00");
-            expect(licenseExpirationDateField).toHaveValue("2024-09-21T15:33:00");
+            expect(licensePurchaseDateField).toHaveValue("2024-09-21T15:32");
+            expect(licenseExpirationDateField).toHaveValue("2024-09-21T15:33");
            
             expect(submitButton).toBeInTheDocument();
             
@@ -199,13 +200,13 @@ describe("DatabaseEntryEditPage tests", () => {
             fireEvent.change(emailField, { target: { value: 'seaweed2@ucsb.edu' } });
             fireEvent.change(departmentField, { target: { value: 'Art2' } });
             fireEvent.change(licenseAllocatedField, { target: { value: 'Adobe Acrobat2' } });
-            fireEvent.change(licensePurchaseDateField, { target: { value: '2025-10-22T15:32:00' } });
-            fireEvent.change(licenseExpirationDateField, { target: { value: '2026-10-22T15:32:00' } });
+            fireEvent.change(licensePurchaseDateField, { target: { value: '2025-10-22T15:33' } });
+            fireEvent.change(licenseExpirationDateField, { target: { value: '2026-10-22T15:34' } });
 
             fireEvent.click(submitButton);
 
             await waitFor(() => expect(mockToast).toBeCalled());
-            expect(mockToast).toBeCalledWith("DatabaseEntry Updated - id: 17 name: Seaweed2");
+            expect(mockToast).toBeCalledWith("Database Entry Updated - id: 17 name: Seaweed2");
             expect(mockNavigate).toBeCalledWith({ "to": "/database_entries" });
         });
 

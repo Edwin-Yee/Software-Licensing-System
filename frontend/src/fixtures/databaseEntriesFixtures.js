@@ -7,8 +7,8 @@ const databaseEntriesFixtures = {
         "email": "starfish@ucsb.edu",
         "department": "engineering",
         "licenseAllocated": "Adobe Creative Cloud",
-        "licensePurchaseDate": "1/1/2023",
-        "licenseExpirationDate": "1/1/2024"   
+        "licensePurchaseDate": "2023-09-21T15:31:00",
+        "licenseExpirationDate": "2024-09-21T15:31:00",
       }
     ],
 
@@ -20,8 +20,8 @@ const databaseEntriesFixtures = {
             "email": "octopus@ucsb.edu",
             "department": "dance",
             "licenseAllocated": "Adobe Acrobat",
-            "licensePurchaseDate": "1/1/2021",
-            "licenseExpirationDate": "1/1/2022"   
+            "licensePurchaseDate": "2023-10-21T15:31:00",
+            "licenseExpirationDate": "2024-11-21T15:31:00",
         },
 
         {
@@ -30,8 +30,8 @@ const databaseEntriesFixtures = {
             "email": "sea_anemone@ucsb.edu",
             "department": "art",
             "licenseAllocated": "Adobe Creative Cloud",
-            "licensePurchaseDate": "5/5/2023",
-            "licenseExpirationDate": "5/5/2024"   
+            "licensePurchaseDate": "2023-09-22T15:31:00",
+            "licenseExpirationDate": "2024-09-23T15:31:00",
         },
 
         {
@@ -40,8 +40,8 @@ const databaseEntriesFixtures = {
             "email": "lobster@ucsb.edu",
             "department": "engineering",
             "licenseAllocated": "Adobe Acrobat",
-            "licensePurchaseDate": "5/8/2013",
-            "licenseExpirationDate": "5/8/2014"   
+            "licensePurchaseDate": "2017-09-21T15:31:00",
+            "licenseExpirationDate": "2027-09-21T15:31:00",
         },
     ]
 };

@@ -60,9 +60,9 @@ describe("DatabaseEntriesCreatePage tests", () => {
             name: "Starfish",
             email: "starfish@ucsb.edu",
             department: "Math",
-            license_allocated: "Adobe Photoshop",
-            license_purchase_date: "2023-09-21T15:31:00",
-            license_expiration_date: "2023-09-21T15:31:01",
+            licenseAllocated: "Adobe Photoshop",
+            licensePurchaseDate: "2023-09-21T15:31",
+            licenseExpirationDate: "2023-09-22T15:31",
         };
 
         axiosMock.onPost("/api/database_entries/post").reply(202, database_entry);
@@ -104,8 +104,8 @@ describe("DatabaseEntriesCreatePage tests", () => {
         fireEvent.change(emailInput, { target: { value: 'new_starfish_account@ucsb.edu' } })
         fireEvent.change(departmentInput, { target: { value: 'Biology' } })
         fireEvent.change(licenseAllocatedInput, { target: { value: 'Adobe Illustrator' } })
-        fireEvent.change(licensePurchaseDateInput, { target: { value: '2024-09-21T15:31:00' } })
-        fireEvent.change(licenseExpirationDateInput, { target: { value: '2024-09-21T15:32:00' } })
+        fireEvent.change(licensePurchaseDateInput, { target: { value: '2024-09-22T15:31' } })
+        fireEvent.change(licenseExpirationDateInput, { target: { value: '2024-09-23T15:32' } })
         fireEvent.click(createButton);
 
         await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
@@ -114,9 +114,9 @@ describe("DatabaseEntriesCreatePage tests", () => {
             name: "Starfish",
             email: "new_starfish_account@ucsb.edu",
             department: "Biology",
-            license_allocated: "Adobe Illustrator",
-            license_purchase_date: "2024-09-21T15:31:00",
-            license_expiration_date: "2024-09-21T15:32:00",
+            licenseAllocated: "Adobe Illustrator",
+            licensePurchaseDate: "2024-09-22T15:31",
+            licenseExpirationDate: "2024-09-23T15:32",
         });
 
         // assert - check that the toast was called with the expected message

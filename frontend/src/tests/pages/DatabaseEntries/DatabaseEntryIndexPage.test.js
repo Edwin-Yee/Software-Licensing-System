@@ -3,7 +3,7 @@ import DatabaseEntryIndexPage from "main/pages/DatabaseEntries/DatabaseEntryInde
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import mockConsole from "jest-mock-console";
-import { databaseEntryFixtures } from "fixtures/databaseEntriesFixtures";
+import { databaseEntriesFixtures } from "fixtures/databaseEntriesFixtures";
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
@@ -56,16 +56,16 @@ describe("DatabaseEntryIndexPage tests", () => {
         );
 
         await waitFor(() => {
-            expect(screen.getByText(/Create DatabaseEntry/)).toBeInTheDocument();
+            expect(screen.getByText(/Create Database Entry/)).toBeInTheDocument();
         });
-        const button = screen.getByText(/Create DatabaseEntry/);
+        const button = screen.getByText(/Create Database Entry/);
         expect(button).toHaveAttribute("href", "/database_entries/create");
         expect(button).toHaveAttribute("style", "float: right;");
     });
 
     test("renders three database entries correctly for regular user", async () => {
         setupUserOnly();
-        axiosMock.onGet("/api/database_entries/all").reply(200, databaseEntryFixtures.threeDatabaseEntries);
+        axiosMock.onGet("/api/database_entries/all").reply(200, databaseEntriesFixtures.threeDatabaseEntries);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -79,14 +79,26 @@ describe("DatabaseEntryIndexPage tests", () => {
         expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("3");
         expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("4");
 
-        const createDatabaseEntryButton = screen.queryByText("Create DatabaseEntry");
+        const createDatabaseEntryButton = screen.queryByText("Create Database Entry");
         expect(createDatabaseEntryButton).not.toBeInTheDocument();
-
-        const name = screen.getByText("Freebirds");
+   
+        const name = screen.getByText("Sea Anemone");
         expect(name).toBeInTheDocument();
 
-        const description = screen.getByText("Burrito joint, and iconic Isla Vista location");
-        expect(description).toBeInTheDocument();
+        const email = screen.getByText("sea_anemone@ucsb.edu");
+        expect(email).toBeInTheDocument();
+
+        const department = screen.getByText("art");
+        expect(department).toBeInTheDocument();
+
+        const licenseAllocated = screen.getByText("Adobe Creative Cloud");
+        expect(licenseAllocated).toBeInTheDocument();
+
+        const licensePurchaseDate = screen.getByText("2023-09-22T15:31:00");
+        expect(licensePurchaseDate).toBeInTheDocument();
+
+        const licenseExpirationDate = screen.getByText("2024-09-23T15:31:00");
+        expect(licenseExpirationDate).toBeInTheDocument();
 
         // for non-admin users, details button is visible, but the edit and delete buttons should not be visible
         expect(screen.queryByTestId("DatabaseEntryTable-cell-row-0-col-Delete-button")).not.toBeInTheDocument();
@@ -117,11 +129,11 @@ describe("DatabaseEntryIndexPage tests", () => {
     });
 
     test("what happens when you click delete, admin", async () => {
+ 
         setupAdminUser();
 
-        axiosMock.onGet("/api/database_entries/all").reply(200, databaseEntryFixtures.threeDatabaseEntries);
-        axiosMock.onDelete("/api/database_entries").reply(200, "DatabaseEntry with id 1 was deleted");
-
+        axiosMock.onGet("/api/database_entries/all").reply(200, databaseEntriesFixtures.threeDatabaseEntries);
+        axiosMock.onDelete("/api/database_entries").reply(200, "Database Entry with id 1 was deleted");
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -141,7 +153,7 @@ describe("DatabaseEntryIndexPage tests", () => {
 
         fireEvent.click(deleteButton);
 
-        await waitFor(() => { expect(mockToast).toBeCalledWith("DatabaseEntry with id 1 was deleted") });
+        await waitFor(() => { expect(mockToast).toBeCalledWith("Database Entry with id 1 was deleted") });
 
         await waitFor(() => { expect(axiosMock.history.delete.length).toBe(1); });
         expect(axiosMock.history.delete[0].url).toBe("/api/database_entries");

@@ -113,11 +113,11 @@ function DatabaseEntryForm({ initialContents, submitAction, buttonLabel = "Creat
                     data-testid={testIdPrefix + "-licensePurchaseDate"}
                     id="licensePurchaseDate"
                     type="datetime-local"
-                    isInvalid={Boolean(errors.localDateTime)}
+                    isInvalid={Boolean(errors.licensePurchaseDate)}
                     {...register("licensePurchaseDate", { required: true, pattern: isodate_regex })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.localDateTime && 'License Purchase Date is required. '}
+                    {errors.licensePurchaseDate && 'licensePurchaseDate is required.'}
                 </Form.Control.Feedback>
             </Form.Group>
 
@@ -128,11 +128,11 @@ function DatabaseEntryForm({ initialContents, submitAction, buttonLabel = "Creat
                     data-testid={testIdPrefix + "-licenseExpirationDate"}
                     id="licenseExpirationDate"
                     type="datetime-local"
-                    isInvalid={Boolean(errors.localDateTime)}
+                    isInvalid={Boolean(errors.licensePurchaseDate)}
                     {...register("licenseExpirationDate", { required: true, pattern: isodate_regex })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.localDateTime && 'License Expiration Date is required. '}
+                    {errors.licenseExpirationDate && 'licenseExpirationDate is required.'}
                 </Form.Control.Feedback>
             </Form.Group>
 

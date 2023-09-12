@@ -1,5 +1,5 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
-import { databaseEntryFixtures } from "fixtures/databaseEntriesFixtures";
+import { databaseEntriesFixtures } from "fixtures/databaseEntriesFixtures";
 import DatabaseEntryTable from "main/components/DatabaseEntries/DatabaseEntryTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
@@ -17,7 +17,7 @@ describe("DatabaseEntryTable tests", () => {
   const queryClient = new QueryClient();
 
   const expectedHeaders = ["id", "Name", "Email", "Department", "License Allocated", "License Purchase Date", "License Expiration Date"];
-  const expectedFields = ["id", "name", "email", 'department', "license_allocated", "license_purchase_date", "license_expiration_date"];
+  const expectedFields = ["id", "name", "email", 'department', "licenseAllocated", "licensePurchaseDate", "licenseExpirationDate"];
   const testId = "DatabaseEntryTable";
 
   test("renders empty table correctly", () => {
@@ -54,7 +54,7 @@ describe("DatabaseEntryTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <DatabaseEntryTable database_entries={databaseEntryFixtures.threeDatabaseEntries} currentUser={currentUser} />
+          <DatabaseEntryTable database_entries={databaseEntriesFixtures.threeDatabaseEntries} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -71,10 +71,10 @@ describe("DatabaseEntryTable tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Cristino's Bakery");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Octopus");
 
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("3");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Freebirds");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Sea Anemone");
 
     const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
@@ -94,7 +94,7 @@ describe("DatabaseEntryTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <DatabaseEntryTable database_entries={databaseEntryFixtures.threeDatabaseEntries} currentUser={currentUser} />
+          <DatabaseEntryTable database_entries={databaseEntriesFixtures.threeDatabaseEntries} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -111,10 +111,10 @@ describe("DatabaseEntryTable tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Cristino's Bakery");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Octopus");
 
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("3");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Freebirds");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Sea Anemone");
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
@@ -129,14 +129,14 @@ describe("DatabaseEntryTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <DatabaseEntryTable database_entries={databaseEntryFixtures.threeDatabaseEntries} currentUser={currentUser} />
+          <DatabaseEntryTable database_entries={databaseEntriesFixtures.threeDatabaseEntries} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
 
     // assert - check that the expected content is rendered
     expect(await screen.findByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Cristino's Bakery");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Octopus");
 
     const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
@@ -157,14 +157,14 @@ describe("DatabaseEntryTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <DatabaseEntryTable database_entries={databaseEntryFixtures.threeDatabaseEntries} currentUser={currentUser} />
+          <DatabaseEntryTable database_entries={databaseEntriesFixtures.threeDatabaseEntries} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
 
     // assert - check that the expected content is rendered
     expect(await screen.findByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Cristino's Bakery");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("Octopus");
 
     const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();

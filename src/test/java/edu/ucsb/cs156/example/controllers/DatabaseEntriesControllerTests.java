@@ -21,6 +21,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
+import java.time.LocalDateTime;
+
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -86,9 +88,13 @@ public class DatabaseEntriesControllerTests extends ControllerTestCase {
                 // arrange
 
                 DatabaseEntry databaseEntry = DatabaseEntry.builder()
-                                .name("Shrinp")
-                                .email("shrimp@ucsb.edu")
-                                .build();
+                        .name("Shrimp")
+                        .email("shrimp@ucsb.edu")
+                        .department("linguistics")
+                        .licenseAllocated("Adobe Illustrator")
+                        .licensePurchaseDate(LocalDateTime.parse("2022-01-03T00:00:00"))
+                        .licenseExpirationDate(LocalDateTime.parse("2023-01-03T00:00:00"))
+                        .build();
 
                 when(databaseEntryRepository.findById(eq(7L))).thenReturn(Optional.of(databaseEntry));  // Check not sure why id is 7
 
@@ -131,14 +137,22 @@ public class DatabaseEntriesControllerTests extends ControllerTestCase {
                 // arrange
 
                 DatabaseEntry databaseEntry1 = DatabaseEntry.builder()
-                                .name("Shrinp")
-                                .email("shrimp@ucsb.edu")
-                                .build();
+                        .name("Shrimp")
+                        .email("shrimp@ucsb.edu")
+                        .department("linguistics")
+                        .licenseAllocated("Adobe Illustrator")
+                        .licensePurchaseDate(LocalDateTime.parse("2022-01-03T00:00:00"))
+                        .licenseExpirationDate(LocalDateTime.parse("2023-01-04T00:00:00"))
+                        .build();
 
                 DatabaseEntry databaseEntry2 = DatabaseEntry.builder()
-                                .name("Oyster")
-                                .email("oyster@ucsb.edu")
-                                .build();
+                        .name("Oyster")
+                        .email("oyster@ucsb.edu")
+                        .department("music")
+                        .licenseAllocated("Adobe Creative Cloud")
+                        .licensePurchaseDate(LocalDateTime.parse("2022-02-03T00:00:00"))
+                        .licenseExpirationDate(LocalDateTime.parse("2023-02-04T00:00:00"))
+                        .build();
 
                 ArrayList<DatabaseEntry> expectedDatabaseEntries = new ArrayList<>();
                 expectedDatabaseEntries.addAll(Arrays.asList(databaseEntry1, databaseEntry2));
@@ -163,17 +177,21 @@ public class DatabaseEntriesControllerTests extends ControllerTestCase {
                 // arrange
 
                 DatabaseEntry databaseEntry1 = DatabaseEntry.builder()
-                                .name("Shrimp")
-                                .email("shrimp@ucsb.edu")
-                                .build();
+                        .name("Shrimp")
+                        .email("shrimp@ucsb.edu")
+                        .department("linguistics")
+                        .licenseAllocated("Adobe Illustrator")
+                        .licensePurchaseDate(LocalDateTime.parse("2022-01-03T00:00:00"))
+                        .licenseExpirationDate(LocalDateTime.parse("2022-01-04T00:00:00"))
+                        .build();
 
                 when(databaseEntryRepository.save(eq(databaseEntry1))).thenReturn(databaseEntry1);
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/database_entries/post?name=Shrimp&email=shrimp@ucsb.edu")
-                                                .with(csrf()))
-                                .andExpect(status().isOk()).andReturn();
+                        post("/api/database_entries/post?name=Shrimp&email=shrimp@ucsb.edu&department=linguistics&licenseAllocated=Adobe Illustrator&licensePurchaseDate=2022-01-03T00:00:00&licenseExpirationDate=2022-01-04T00:00:00")
+                                .with(csrf()))
+                        .andExpect(status().isOk()).andReturn();
 
                 // assert
                 verify(databaseEntryRepository, times(1)).save(databaseEntry1);
@@ -186,11 +204,15 @@ public class DatabaseEntriesControllerTests extends ControllerTestCase {
         @Test
         public void admin_can_delete_a_database_entry() throws Exception {
                 // arrange
-
+ 
                 DatabaseEntry databaseEntry = DatabaseEntry.builder()
-                                .name("Shrinp")
-                                .email("shrimp@ucsb.edu")
-                                .build();
+                        .name("Shrimp")
+                        .email("shrimp@ucsb.edu")
+                        .department("linguistics")
+                        .licenseAllocated("Adobe Illustrator")
+                        .licensePurchaseDate(LocalDateTime.parse("2022-01-03T00:00:00"))
+                        .licenseExpirationDate(LocalDateTime.parse("2023-01-03T00:00:00"))
+                        .build();
 
                 when(databaseEntryRepository.findById(eq(15L))).thenReturn(Optional.of(databaseEntry));
 

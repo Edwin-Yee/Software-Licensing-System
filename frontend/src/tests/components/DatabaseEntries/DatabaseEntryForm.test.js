@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import DatabaseEntryForm from "main/components/DatabaseEntries/DatabaseEntryForm";
-import { databaseEntryFixtures } from "fixtures/databaseEntriesFixtures";
+import { databaseEntriesFixtures } from "fixtures/databaseEntriesFixtures";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -41,7 +41,7 @@ describe("DatabaseEntryForm tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <Router>
-                    <DatabaseEntryForm initialContents={databaseEntryFixtures.oneDatabaseEntry} />
+                    <DatabaseEntryForm initialContents={databaseEntriesFixtures.oneDatabaseEntry} />
                 </Router>
             </QueryClientProvider>
         );
@@ -87,12 +87,12 @@ describe("DatabaseEntryForm tests", () => {
         const submitButton = screen.getByText(/Create/);
         fireEvent.click(submitButton);
 
-        await screen.findByText(/Name is required/);
-        expect(screen.getByText(/Email is required/)).toBeInTheDocument();
-        expect(screen.getByText(/Department is required/)).toBeInTheDocument();
-        expect(screen.getByText(/License Allocated is required/)).toBeInTheDocument();
-        expect(screen.getByText(/License Purcahse Date is required/)).toBeInTheDocument();
-        expect(screen.getByText(/License Expiration Date is required/)).toBeInTheDocument();
+        await screen.findByText(/Name is required./);
+        expect(screen.getByText(/Email is required./)).toBeInTheDocument();
+        expect(screen.getByText(/Department is required./)).toBeInTheDocument();
+        expect(screen.getByText(/License Allocated is required./)).toBeInTheDocument();
+        expect(screen.getByText(/licensePurchaseDate is required./)).toBeInTheDocument();
+        expect(screen.getByText(/licenseExpirationDate is required./)).toBeInTheDocument();
 
         const nameInput = screen.getByTestId(`${testId}-name`);
         fireEvent.change(nameInput, { target: { value: "a".repeat(31) } });

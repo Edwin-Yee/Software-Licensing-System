@@ -99,6 +99,10 @@ public class DatabaseEntriesController extends ApiController {
 
         database_entry.setName(incoming.getName());
         database_entry.setEmail(incoming.getEmail());
+        database_entry.setDepartment(incoming.getDepartment());
+        database_entry.setLicenseAllocated(incoming.getLicenseAllocated());
+        database_entry.setLicensePurchaseDate(incoming.getLicensePurchaseDate());
+        database_entry.setLicenseExpirationDate(incoming.getLicenseExpirationDate());
 
         databaseEntryRepository.save(database_entry);
 
