@@ -81,7 +81,7 @@ function DatabaseEntryForm({ initialContents, submitAction, buttonLabel = "Creat
                     data-testid={testIdPrefix + "-department"}
                     id="department"
                     type="text"
-                    isInvalid={Boolean(errors.email)}
+                    isInvalid={Boolean(errors.department)}
                     {...register("department", {
                         required: "Department is required."
                     })}
@@ -97,7 +97,7 @@ function DatabaseEntryForm({ initialContents, submitAction, buttonLabel = "Creat
                     data-testid={testIdPrefix + "-licenseAllocated"}
                     id="licenseAllocated"
                     type="text"
-                    isInvalid={Boolean(errors.email)}
+                    isInvalid={Boolean(errors.licenseAllocated)}
                     {...register("licenseAllocated", {
                         required: "License Allocated is required."
                     })}
@@ -128,7 +128,7 @@ function DatabaseEntryForm({ initialContents, submitAction, buttonLabel = "Creat
                     data-testid={testIdPrefix + "-licenseExpirationDate"}
                     id="licenseExpirationDate"
                     type="datetime-local"
-                    isInvalid={Boolean(errors.licensePurchaseDate)}
+                    isInvalid={Boolean(errors.licenseExpirationDate)}
                     {...register("licenseExpirationDate", { required: true, pattern: isodate_regex })}
                 />
                 <Form.Control.Feedback type="invalid">
