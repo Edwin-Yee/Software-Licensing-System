@@ -10,7 +10,28 @@ export default function DatabaseEntryTable({
     database_entries,
     currentUser,
     testIdPrefix = "DatabaseEntryTable" }) {
+    
+    // Group entries by department, ChatGPT
+    const groupedData = database_entries.reduce((result, entry) => {
+        const department = entry.department;
+        if (!result[department]) {
+            result[department] = [];
+        }
+        result[department].push(entry);
+        return result;
+        }, {});
+    
+    // Sort and group names alphabetically within each department, ChatGPT
+    Object.values(groupedData).forEach((entriesInDepartment) => {
+        entriesInDepartment.sort((a, b) => a.name.localeCompare(b.name));
+    });
 
+    // Create an array of department headers and associated entries, ChatGPT
+    const departmentHeaders = Object.entries(groupedData).map(([department, entriesInDepartment]) => ({
+        department,
+        entries: entriesInDepartment,
+    }));
+        
     const navigate = useNavigate();
 
     const editCallback = (cell) => {
@@ -66,10 +87,22 @@ export default function DatabaseEntryTable({
         columns.push(ButtonColumn("Delete", "danger", deleteCallback, testIdPrefix));
     } 
 
-    return <OurTable
-        data={database_entries}
-        columns={columns}
-        testid={testIdPrefix}
-    />;
+    // Return header and OurTable, ChatGPT
+    return (
+        <div>
+            {departmentHeaders.map(({ department, entries }) => (
+            <div key={department}>
+                <h2>{department} Department</h2>
+                <OurTable columns={columns} data={entries} testid={testIdPrefix} />
+            </div>
+            ))}
+        </div>
+    );
+
+    // return <OurTable
+    //     data={database_entries}
+    //     columns={columns}
+    //     testid={testIdPrefix}
+    // />;
 };
 
