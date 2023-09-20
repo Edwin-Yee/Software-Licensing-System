@@ -50,6 +50,7 @@ input:focus {
   } */
   
   .dataResult .dataItem {
+    margin-left: 2rem;
     text-align: left;
     width: 100%;
     height: 50px;

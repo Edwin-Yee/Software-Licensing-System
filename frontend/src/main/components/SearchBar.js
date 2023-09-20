@@ -3,6 +3,7 @@ import './style/SearchBar3.css'
 import SearchIcon from '@material-ui/icons/Search'
 import CloseIcon from '@material-ui/icons/Close'
 import {FaSearch} from "react-icons/fa"
+import { Link } from "react-router-dom";
 
 function SearchBar({ placeholder, data }) {
     if (placeholder == null) {
@@ -45,38 +46,46 @@ function SearchBar({ placeholder, data }) {
                     <div className="dataResult">
                         {filteredData.slice(0, 15).map((value, key) => {
                             return (
-                                <a className="dataItem" href={value.link}>
-                                    <p>{value.name}</p>
-                                </a>
+                                <Link to = {value.link}> 
+                                    <a className="dataItem">
+                                        {value.name}
+                                    </a>                                
+                                </Link>
+
                             );
                         })}    
                     </div>
                 )}
-
-
-                {/* <div className="search">
-                    <div className="searchInputs">
-                        <input type="text" placeholder={placeholder} value = {wordEntered} onChange={handleFilter}></input>
-                        <div className="searchIcon">
-                            {wordEntered.length === 0 ? (<SearchIcon/>)
-                            : (<CloseIcon id="clearBtn" onClick={clearInput}/>)}
-                        </div>
-                    </div>
-                    {filteredData.length !== 0 && (
-                        <div className="dataResult">
-                            {filteredData.slice(0, 15).map((value, key) => {
-                                return (
-                                    <a className="dataItem" href={value.link}>
-                                        <p>{value.name}</p>
-                                    </a>
-                                );
-                            })}    
-                        </div>
-                    )}
-        
-                </div> */}
             </div>
         </div>
+
+        // <div className="search">
+        //     <div className="searchInputs">
+        //         <input type="text" placeholder={placeholder} value = {wordEntered} onChange={handleFilter}></input>
+        //         <div className="searchIcon">
+        //             {wordEntered.length === 0 ? (<SearchIcon/>)
+        //             : (<CloseIcon id="clearBtn" onClick={clearInput}/>)}
+        //         </div>
+        //     </div>
+        //     {filteredData.length !== 0 && (
+        //         <div className="dataResult">
+        //             {filteredData.slice(0, 15).map((value, key) => {
+        //                 return (
+        //                     <a className="dataItem" href={value.link}>
+        //                         <p>{value.name}</p>
+        //                         <li><Link to = {value.link}> See Details / Purchase</Link></li>
+        //                     </a>
+        //                 );
+        //             })}    
+
+
+
+
+        //         </div>
+        //     )}
+
+        // </div>
+        
 
 
     );

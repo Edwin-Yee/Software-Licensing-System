@@ -63,6 +63,16 @@ export const SoftwareLicensesPage = () => {
                             <label for="department">Associated Department:</label>
                             <input type="text" id="department" name="department" required></input>
                             
+                            <label for="licenseRequested">License Requested:</label>
+                            <input type="text" 
+                                className="gray-background"
+                                id="numLicensesRequested" 
+                                name="numLicensesRequested" 
+                                value={current_product.name}
+                                readOnly={true}
+                                required>
+                            </input>
+
                             <label for="numLicensesRequested">Amount of Licenses Requested:</label>
                             <input type="text" id="numLicensesRequested" name="numLicensesRequested" required></input>
 
