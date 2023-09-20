@@ -26,8 +26,10 @@ export default function HomePage() {
         <div className="App">
           <div className='header'>
             <h1>Software Products</h1>
+            
             <div className="search">
-              <SearchBar placeholder="Enter Software Name..." data = {products}></SearchBar>
+              <SearchBar data = {products} ></SearchBar>
+              {/* <SearchBar placeholder="Enter Software Name..." data = {products}></SearchBar> */}
             </div>
             
             <div className="products">

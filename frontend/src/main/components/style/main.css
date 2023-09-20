@@ -1,3 +1,11 @@
+h1 {
+	padding-bottom: 20px;
+}
+
+.input {
+	background-color: whitesmoke;
+}
+
 .search {
     align-items: center;
     margin:auto;
