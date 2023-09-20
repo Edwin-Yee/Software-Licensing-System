@@ -3,4 +3,11 @@
     color: white; /* Set your desired link color */
     text-decoration: none; /* Remove default underline */
   }
-  
+
+/* .btn {
+  margin-right: 20px;
+} */
+
+.me-3 {
+  margin-left: 20px;
+}

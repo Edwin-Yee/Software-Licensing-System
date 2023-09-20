@@ -14,6 +14,7 @@ import SearchBar from "main/components/SearchBar";
 export default function HomePage() {
 
   const { products } = data; 
+  
   const [cartItems, setCartItems] = useState([]);
   // const onAdd = (product) => {
   //   const exist = cartItems.find(x => x.i)

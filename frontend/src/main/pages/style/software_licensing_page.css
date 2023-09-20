@@ -89,3 +89,7 @@
     cursor: pointer;
     margin-top: 20px; 
 }
+
+.gray-background {
+    background-color: #c4c0c0;
+}

@@ -1,11 +1,14 @@
-import { useState } from "react"
-import { Route, useLocation, Link } from "react-router-dom";
+// import { useState } from "react"
+// import { Route, useLocation, Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
-import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
+// import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import data from "data";
 import './style/software_licensing_page.css';
+import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 export const SoftwareLicensesPage = () => {
+    const { data: currentUser } = useCurrentUser();
+
     const params = useParams();
     const { products } = data; 
     const current_product = products[params.licenseID-1]
@@ -38,10 +41,24 @@ export const SoftwareLicensesPage = () => {
                     <div className = "approvalForm">
                         <form id="approvalForm">
                             <label for="fullName">Full Name:</label>
-                            <input type="text" id = "fullName" name= "fullName" required></input>
+                            <input type="text" 
+                                className="gray-background"
+                                id ="fullName" 
+                                name="fullName" 
+                                value={currentUser.root.user.fullName} 
+                                readOnly={true} 
+                                required> 
+                            </input>
 
                             <label for="email">UCSB Email:</label>
-                            <input type="text" id="email" name="email" required></input>
+                            <input type="text" 
+                                className="gray-background"
+                                id="email" 
+                                name="email" 
+                                value={currentUser.root.user.email}
+                                readOnly={true}
+                                required>
+                            </input>
 
                             <label for="department">Associated Department:</label>
                             <input type="text" id="department" name="department" required></input>
