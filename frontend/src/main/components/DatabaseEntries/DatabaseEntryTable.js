@@ -17,6 +17,17 @@ export default function DatabaseEntryTable({
         if (!result[department]) {
             result[department] = [];
         }
+
+        if (entry.licensePurchaseDate.length > 10){
+            // Remove the datetime from the table for licensePurchaseDate
+            entry.licensePurchaseDate = (entry.licensePurchaseDate).slice(0,-9);
+        }
+
+        if (entry.licenseExpirationDate.length > 10){
+            // Remove the datetime from the table for licenseExpirationDate
+            entry.licenseExpirationDate = (entry.licenseExpirationDate).slice(0,-9);
+        }
+
         result[department].push(entry);
         return result;
         }, {});
@@ -93,6 +104,7 @@ export default function DatabaseEntryTable({
             {departmentHeaders.map(({ department, entries }) => (
             <div key={department}>
                 <h2>{department} Department</h2>
+                
                 <OurTable columns={columns} data={entries} testid={testIdPrefix} />
             </div>
             ))}

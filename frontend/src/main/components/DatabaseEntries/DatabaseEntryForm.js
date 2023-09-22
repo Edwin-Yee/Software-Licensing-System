@@ -18,8 +18,7 @@ function DatabaseEntryForm({ initialContents, submitAction, buttonLabel = "Creat
     const navigate = useNavigate();
 
     // Stryker disable next-line Regex
-    const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
-
+    // const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
     const testIdPrefix = "DatabaseEntryForm";
 
     return (
@@ -112,9 +111,10 @@ function DatabaseEntryForm({ initialContents, submitAction, buttonLabel = "Creat
                 <Form.Control
                     data-testid={testIdPrefix + "-licensePurchaseDate"}
                     id="licensePurchaseDate"
-                    type="datetime-local"
+                    type="date"
                     isInvalid={Boolean(errors.licensePurchaseDate)}
-                    {...register("licensePurchaseDate", { required: true, pattern: isodate_regex })}
+                    required pattern = "\d{4}-\d{2}-\d{2}"
+                    {...register("licensePurchaseDate", { required: true })}
                 />
                 <Form.Control.Feedback type="invalid">
                     {errors.licensePurchaseDate && 'licensePurchaseDate is required.'}
@@ -127,9 +127,10 @@ function DatabaseEntryForm({ initialContents, submitAction, buttonLabel = "Creat
                 <Form.Control
                     data-testid={testIdPrefix + "-licenseExpirationDate"}
                     id="licenseExpirationDate"
-                    type="datetime-local"
+                    type="date"
                     isInvalid={Boolean(errors.licenseExpirationDate)}
-                    {...register("licenseExpirationDate", { required: true, pattern: isodate_regex })}
+                    required pattern = "\d{4}-\d{2}-\d{2}"
+                    {...register("licenseExpirationDate", { required: true })}
                 />
                 <Form.Control.Feedback type="invalid">
                     {errors.licenseExpirationDate && 'licenseExpirationDate is required.'}

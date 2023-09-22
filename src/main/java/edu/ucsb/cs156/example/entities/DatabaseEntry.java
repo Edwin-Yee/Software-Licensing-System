@@ -26,7 +26,7 @@ public class DatabaseEntry {
   private String department; 
   private String licenseAllocated;
 
-  private LocalDateTime licensePurchaseDate;
-  private LocalDateTime licenseExpirationDate;
+  private String licensePurchaseDate;
+  private String licenseExpirationDate;
 
 }

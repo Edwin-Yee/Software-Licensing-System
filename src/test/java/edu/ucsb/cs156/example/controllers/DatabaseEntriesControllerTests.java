@@ -92,8 +92,10 @@ public class DatabaseEntriesControllerTests extends ControllerTestCase {
                         .email("shrimp@ucsb.edu")
                         .department("linguistics")
                         .licenseAllocated("Adobe Illustrator")
-                        .licensePurchaseDate(LocalDateTime.parse("2022-01-03T00:00:00"))
-                        .licenseExpirationDate(LocalDateTime.parse("2023-01-03T00:00:00"))
+                        .licensePurchaseDate("2022-01-03")
+                        .licenseExpirationDate("2023-01-03")
+                        // .licensePurchaseDate(LocalDateTime.parse("2022-01-03T00:00:00"))
+                        // .licenseExpirationDate(LocalDateTime.parse("2023-01-03T00:00:00"))
                         .build();
 
                 when(databaseEntryRepository.findById(eq(7L))).thenReturn(Optional.of(databaseEntry));  // Check not sure why id is 7
@@ -141,8 +143,10 @@ public class DatabaseEntriesControllerTests extends ControllerTestCase {
                         .email("shrimp@ucsb.edu")
                         .department("linguistics")
                         .licenseAllocated("Adobe Illustrator")
-                        .licensePurchaseDate(LocalDateTime.parse("2022-01-03T00:00:00"))
-                        .licenseExpirationDate(LocalDateTime.parse("2023-01-04T00:00:00"))
+                        .licensePurchaseDate("2022-01-03")
+                        .licenseExpirationDate("2023-01-04")
+                        // .licensePurchaseDate(LocalDateTime.parse("2022-01-03T00:00:00"))
+                        // .licenseExpirationDate(LocalDateTime.parse("2023-01-04T00:00:00"))
                         .build();
 
                 DatabaseEntry databaseEntry2 = DatabaseEntry.builder()
@@ -150,8 +154,10 @@ public class DatabaseEntriesControllerTests extends ControllerTestCase {
                         .email("oyster@ucsb.edu")
                         .department("music")
                         .licenseAllocated("Adobe Creative Cloud")
-                        .licensePurchaseDate(LocalDateTime.parse("2022-02-03T00:00:00"))
-                        .licenseExpirationDate(LocalDateTime.parse("2023-02-04T00:00:00"))
+                        .licensePurchaseDate("2022-02-03")
+                        .licenseExpirationDate("2023-02-04")
+                        // .licensePurchaseDate(LocalDateTime.parse("2022-02-03T00:00:00"))
+                        // .licenseExpirationDate(LocalDateTime.parse("2023-02-04T00:00:00"))
                         .build();
 
                 ArrayList<DatabaseEntry> expectedDatabaseEntries = new ArrayList<>();
@@ -181,15 +187,17 @@ public class DatabaseEntriesControllerTests extends ControllerTestCase {
                         .email("shrimp@ucsb.edu")
                         .department("linguistics")
                         .licenseAllocated("Adobe Illustrator")
-                        .licensePurchaseDate(LocalDateTime.parse("2022-01-03T00:00:00"))
-                        .licenseExpirationDate(LocalDateTime.parse("2022-01-04T00:00:00"))
+                        .licensePurchaseDate("2022-01-03")
+                        .licenseExpirationDate("2022-01-04")
+                        // .licensePurchaseDate(LocalDateTime.parse("2022-01-03T00:00:00"))
+                        // .licenseExpirationDate(LocalDateTime.parse("2022-01-04T00:00:00"))
                         .build();
 
                 when(databaseEntryRepository.save(eq(databaseEntry1))).thenReturn(databaseEntry1);
 
                 // act
                 MvcResult response = mockMvc.perform(
-                        post("/api/database_entries/post?name=Shrimp&email=shrimp@ucsb.edu&department=linguistics&licenseAllocated=Adobe Illustrator&licensePurchaseDate=2022-01-03T00:00:00&licenseExpirationDate=2022-01-04T00:00:00")
+                        post("/api/database_entries/post?name=Shrimp&email=shrimp@ucsb.edu&department=linguistics&licenseAllocated=Adobe Illustrator&licensePurchaseDate=2022-01-03&licenseExpirationDate=2022-01-04")
                                 .with(csrf()))
                         .andExpect(status().isOk()).andReturn();
 
@@ -210,8 +218,10 @@ public class DatabaseEntriesControllerTests extends ControllerTestCase {
                         .email("shrimp@ucsb.edu")
                         .department("linguistics")
                         .licenseAllocated("Adobe Illustrator")
-                        .licensePurchaseDate(LocalDateTime.parse("2022-01-03T00:00:00"))
-                        .licenseExpirationDate(LocalDateTime.parse("2023-01-03T00:00:00"))
+                        .licensePurchaseDate("2022-01-03")
+                        .licenseExpirationDate("2022-01-04")
+                        // .licensePurchaseDate(LocalDateTime.parse("2022-01-03T00:00:00"))
+                        // .licenseExpirationDate(LocalDateTime.parse("2022-01-04T00:00:00"))
                         .build();
 
                 when(databaseEntryRepository.findById(eq(15L))).thenReturn(Optional.of(databaseEntry));
