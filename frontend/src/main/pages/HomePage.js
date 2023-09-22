@@ -8,7 +8,7 @@ import adobe_creative_cloud from "../../images/adobe_creative_cloud.png";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { GiShoppingCart } from "react-icons/gi"
-import "../components/style/main.css"
+import './style/homepage.css';
 import SearchBar from "main/components/SearchBar";
 
 export default function HomePage() {
@@ -60,9 +60,11 @@ export default function HomePage() {
                   </span>
 
                   <div className="buttons">
-                    <button className="btn">
-                      <li><Link to = {product.link}> See Details / Purchase</Link></li>
-                    </button>
+                    <Link to = {product.link}>
+                      <button className="btn">
+                        See Details / Purchase
+                      </button>
+                    </Link>
 
 
                   </div>
