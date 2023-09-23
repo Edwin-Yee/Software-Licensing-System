@@ -34,8 +34,13 @@ function App() {
                 </Route> */}
 
                 <Route exact path="/" element={<HomePage />} />
-
-                <Route path="/software-licenses/:licenseID" element={<SoftwareLicensesPage /> } />
+                
+                {hasRole(currentUser, "ROLE_ADMIN") && (
+                        <>
+                            <Route path="/software-licenses/:licenseID" element={<SoftwareLicensesPage /> } />
+                        </>
+                    )
+                }
 
                 <Route exact path="/profile" element={<ProfilePage />} />
                 {

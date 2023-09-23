@@ -7,12 +7,47 @@ import './style/software_licensing_page.css';
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 import BasicLayout from 'main/layouts/BasicLayout/BasicLayout';
 
+import React, { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+
 export const SoftwareLicensesPage = () => {
     const { data: currentUser } = useCurrentUser();
 
     const params = useParams();
     const { products } = data; 
     const current_product = products[params.licenseID-1]
+
+    const createToast = () => toast.success('Form sent for approval!', {
+        duration: 5000,       
+    });
+
+    const [formData, setFormData] = useState({
+        department: '',
+        numLicensesRequested: '',
+    });
+
+
+    const isFormValid = () => {
+        return (
+          formData.department.trim() !== '' &&
+          formData.numLicensesRequested.trim() !== ''
+        );
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    
+        if (isFormValid()) {
+            createToast();
+        } else {
+            console.log("Form invalid");
+        }
+      };
 
     const bodyElement = document.querySelector('body');
 
@@ -41,7 +76,7 @@ export const SoftwareLicensesPage = () => {
 
                     <div className = "right-column">
                         <div className = "approvalForm">
-                            <form id="approvalForm">
+                            <form onSubmit={handleSubmit} id="approvalForm">
                                 <label for="fullName">Full Name:</label>
                                 <input type="text" 
                                     className="gray-background"
@@ -63,26 +98,43 @@ export const SoftwareLicensesPage = () => {
                                 </input>
 
                                 <label for="department">Associated Department:</label>
-                                <input type="text" id="department" name="department" required></input>
+                                <input type="text" 
+                                    id="department" 
+                                    name="department" 
+                                    value={formData.department}
+                                    onChange={handleInputChange}
+                                    required>
+                                </input>
                                 
                                 <label for="licenseRequested">License Requested:</label>
                                 <input type="text" 
                                     className="gray-background"
-                                    id="numLicensesRequested" 
-                                    name="numLicensesRequested" 
+                                    id="licenseRequested" 
+                                    name="licensesRequested" 
                                     value={current_product.name}
                                     readOnly={true}
                                     required>
                                 </input>
 
                                 <label for="numLicensesRequested">Amount of Licenses Requested:</label>
-                                <input type="text" id="numLicensesRequested" name="numLicensesRequested" required></input>
+                                <input type="text" id="numLicensesRequested" name="numLicensesRequested" 
+                                value={formData.numLicensesRequested}
+                                onChange={handleInputChange}
+                                required></input>
 
 
                                 <label for="fileUpload">Upload Paid Invoice [Optional] (PDF):</label>
                                 <input type="file" id="fileUpload" name="fileUpload" accept=".pdf"></input>
 
-                                <button type="submit">Submit for Approval</button>
+                                <div>
+                                    <button 
+                                        type="submit" 
+                                        className="submissionBtn"
+                                        
+                                        >Submit for Approval</button>
+                                    <Toaster/>
+                                </div>
+                                
                             </form>
                         </div>
 
