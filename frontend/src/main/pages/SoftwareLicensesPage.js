@@ -21,11 +21,11 @@ export const SoftwareLicensesPage = () => {
         duration: 5000,       
     });
 
+    // Form check, assisted by ChatGPT
     const [formData, setFormData] = useState({
         department: '',
         numLicensesRequested: '',
     });
-
 
     const isFormValid = () => {
         return (

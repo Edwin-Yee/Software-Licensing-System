@@ -1,37 +1,23 @@
-# team03-m23-10am-3
+# UCSB Software License System Project
 
-Instructions: <https://ucsb-cs156.github.io/m23/lab/team03.html>
+Project Starter Code: https://github.com/ucsb-cs156-m23/proj-happycows-m23-10am-3
 
 Deployments:
 
 # Versions
 * Java: 17
-* node: 16.20.0
+* node: 20.5.1 
 See [docs/versions.md](docs/versions.md) for more information on upgrading versions.
 
 # Overview of application
 
 When complete, this application will have the following features:
 
-* For users that are not logged in, no new features are available.
-* For users that are logged in, but are not admins, each of these menu items takes them to
-  an "index" page for that database table, where they see a list of all of the database
-  records for that table in table form.  The index page, in this case, will not have a button
-  to create database records, and it will not have buttons for Edit and Delete; only Show.
-* The Show button will take the user to a page where they see only one record from the database
-  table.
-* For users that are logged in as admins, they will also see a button on the index page that
-  takes them to a page where they can create a new record in the database.  That page, when the
-  user successfully creates a record, or cancels creating a record, 
-  should navigate back to the index page.
-* For users that are logged in as admins, in addition to the Show button, 
-  they will also see a button on the index page that
-  beside each row for Edit, and Delete.
-* The Edit button, for admins, will navigate to a page where the database record can be edited.
-  After a successful edit, the page will navigate back to the index page.
-* The Delete button, for admins, will make the api call to delete the row, and then 
-  navigate back to the index page.
-
+* For users that are not logged in, no features are available. Users will be presented with a login request screen.
+* For users that are logged in, but are not admins, limited features are available. Users will be able to request licenses on the software licenses page but will not be able to view the database table "index" page.  
+* For users that are logged in as admins, they will have access to all features including the ability to request licenses on the software licenses page and view the database table "index" page. Admin users will see a button on the index page that takes them to a page where they can create a new record in the database.  That page, when the user successfully creates a record, or cancels creating a record,should navigate back to the index page.
+* The Edit button, for admins, will navigate to a page where the database record can be edited. After a successful edit, the page will navigate back to the index page.
+* The Delete button, for admins, will make the api call to delete the row, and then navigate back to the index page.
 
 # Setup before running application
 

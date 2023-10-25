@@ -7,6 +7,8 @@ import { useCurrentUser , hasRole} from 'main/utils/currentUser'
 import { Button } from 'react-bootstrap';
 
 export default function DatabaseEntryIndexPage() {
+    const bodyElement = document.querySelector('body');
+    bodyElement.style.backgroundColor = 'whitesmoke';
 
     const currentUser = useCurrentUser();
 

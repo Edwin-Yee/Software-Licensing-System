@@ -3,17 +3,9 @@ import HomePage from "main/pages/HomePage";
 import ProfilePage from "main/pages/ProfilePage";
 import AdminUsersPage from "main/pages/AdminUsersPage";
 
-import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
-import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
-import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
-
 import DatabaseEntryIndexPage from "main/pages/DatabaseEntries/DatabaseEntryIndexPage";
 import DatabaseEntryCreatePage from "main/pages/DatabaseEntries/DatabaseEntryCreatePage";
 import DatabaseEntryEditPage from "main/pages/DatabaseEntries/DatabaseEntryEditPage";
-
-import PlaceholderIndexPage from "main/pages/Placeholder/PlaceholderIndexPage";
-import PlaceholderCreatePage from "main/pages/Placeholder/PlaceholderCreatePage";
-import PlaceholderEditPage from "main/pages/Placeholder/PlaceholderEditPage";
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
@@ -21,52 +13,32 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import { SoftwareLicensesPage } from "main/pages/SoftwareLicensesPage";
 import { NotFoundPage } from "main/pages/NotFoundPage";
+import { RequestingLoginPage } from "main/pages/RequestingLoginPage";
+import { useState } from "react";
+// import "./packages/react-router-dom/examples/Animation/styles.css";
+// import { TransitionGroup, CSSTransition } from "react-transition-group";
+
+import LoadingPage from "main/pages/LoadingPage"; // TO DO
 
 function App() {
     const { data: currentUser } = useCurrentUser();
-
+    
     return (
         <Router>
             <Routes>
-                {/* <Navigate exact from = "/" to="/UCSB-Software-Licenses" /> */}
-                {/* <Route exact path="/">
-                    <Navigate exact  to="/UCSB-Software-Licenses" replace={true} />
-                </Route> */}
-
                 <Route exact path="/" element={<HomePage />} />
-                
-                {hasRole(currentUser, "ROLE_ADMIN") && (
-                        <>
-                            <Route path="/software-licenses/:licenseID" element={<SoftwareLicensesPage /> } />
-                        </>
-                    )
+                <Route exact path="/profile" element={<ProfilePage />} />
+
+                {   
+                    hasRole(currentUser, "ROLE_ADMIN") && <Route path="/software-licenses/:licenseID" element={<SoftwareLicensesPage /> } />
                 }
 
-                <Route exact path="/profile" element={<ProfilePage />} />
                 {
                     hasRole(currentUser, "ROLE_ADMIN") && <Route exact path="/admin/users" element={<AdminUsersPage />} />
                 }
+    
                 {
-                    hasRole(currentUser, "ROLE_USER") && (
-                        <>
-                            <Route exact path="/ucsbdates" element={<UCSBDatesIndexPage />} />
-                        </>
-                    )
-                }
-                {
-                    hasRole(currentUser, "ROLE_ADMIN") && (
-                        <>
-                            <Route exact path="/ucsbdates/edit/:id" element={<UCSBDatesEditPage />} />
-                            <Route exact path="/ucsbdates/create" element={<UCSBDatesCreatePage />} />
-                        </>
-                    )
-                }
-                {
-                    hasRole(currentUser, "ROLE_USER") && (
-                        <>
-                            <Route exact path="/database_entries" element={<DatabaseEntryIndexPage />} />
-                        </>
-                    )
+                    hasRole(currentUser, "ROLE_USER") && <Route exact path="/database_entries" element={<DatabaseEntryIndexPage />} />
                 }
                 {
                     hasRole(currentUser, "ROLE_ADMIN") && (
@@ -76,22 +48,8 @@ function App() {
                         </>
                     )
                 }
-                {
-                    hasRole(currentUser, "ROLE_USER") && (
-                        <>
-                            <Route exact path="/placeholder" element={<PlaceholderIndexPage />} />
-                        </>
-                    )
-                }
-                {
-                    hasRole(currentUser, "ROLE_ADMIN") && (
-                        <>
-                            <Route exact path="/placeholder/edit/:id" element={<PlaceholderEditPage />} />
-                            <Route exact path="/placeholder/create" element={<PlaceholderCreatePage />} />
-                        </>
-                    )
-                }
-
+              
+                <Route path="/software-licenses/:licenseID" element={<RequestingLoginPage /> } />
                 <Route path="/:error" element={<NotFoundPage /> } />
 
             </Routes>

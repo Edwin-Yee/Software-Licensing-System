@@ -1,6 +1,9 @@
 ## emacs ##
 *~
 
+# Dependencies
+/node_modules 
+
 # Stryker reports
 
 frontend/.stryker-tmp
