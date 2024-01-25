@@ -2,6 +2,10 @@
 
 Project Starter Code: https://github.com/ucsb-cs156-m23/proj-happycows-m23-10am-3
 
+<img width="1420" alt="UCSB Software Licensing Webpage Home" src="https://github.com/Edwin-Yee/Software-Licensing-System/assets/91923759/17b9210a-1b9d-43d2-8d54-730cce855133">
+<img width="1420" alt="UCSB Software Licensing Webpage Database" src="https://github.com/Edwin-Yee/Software-Licensing-System/assets/91923759/ed7686c6-e281-4178-801c-f2989faf9c5c">
+<img width="1420" alt="UCSB Software Licensing Webpage Form" src="https://github.com/Edwin-Yee/Software-Licensing-System/assets/91923759/0fd42fb9-65ef-4755-90e4-7c77df919b6e">
+
 Deployments:
 
 # Versions
