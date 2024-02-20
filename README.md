@@ -59,6 +59,12 @@ Failed to connect to the frontend server... On Dokku, be sure that PRODUCTION is
 
 To exit the process, click on the terminal where spring-boot is running and press the keys "control" and "c" at the same time. Then, click on the terminal where npm is running and press the keys "control" and "c" at the same time.
 
+# Running the npm test suite
+Open a terminal window
+  ```
+  cd frontend
+  npm test
+  ```
 
 # Getting Started on Dokku
 

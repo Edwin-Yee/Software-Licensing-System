@@ -28,7 +28,7 @@ const ProfilePage = () => {
                 </Col>
                 <Col md>
                     <h2>{fullName}</h2>
-                    <p className="lead text-muted">{email}</p>
+                    <p className="lead text-muted" data-testid = "profile-page-email">{email}</p>
                     <RoleBadge role={"ROLE_USER"} currentUser={currentUser}/>
                     <RoleBadge role={"ROLE_MEMBER"} currentUser={currentUser}/>
                     <RoleBadge role={"ROLE_ADMIN"} currentUser={currentUser}/>
