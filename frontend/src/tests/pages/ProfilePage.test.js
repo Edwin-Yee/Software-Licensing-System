@@ -27,7 +27,7 @@ describe("ProfilePage tests", () => {
         );
 
         await screen.findByText("Phillip Conrad");
-        expect(screen.getByText("pconrad.cis@gmail.com")).toBeInTheDocument();
+        expect(screen.getByTestId("profile-page-email")).toHaveTextContent("pconrad.cis@gmail.com");
     });
 
     test("renders correctly for admin user", async () => {
@@ -45,7 +45,7 @@ describe("ProfilePage tests", () => {
         );
 
         await screen.findByText("Phill Conrad");
-        expect(screen.getByText("phtcon@ucsb.edu")).toBeInTheDocument();
+        expect(screen.getByTestId("profile-page-email")).toHaveTextContent("phtcon@ucsb.edu");
         expect(screen.getByTestId("role-badge-user")).toBeInTheDocument();
         expect(screen.getByTestId("role-badge-admin")).toBeInTheDocument();
         expect(screen.getByTestId("role-badge-member")).toBeInTheDocument();

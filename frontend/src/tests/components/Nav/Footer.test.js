@@ -2,11 +2,11 @@ import { render, screen } from "@testing-library/react";
 import Footer from "main/components/Nav/Footer";
 
 describe("Footer tests", () => {
-    test("renders correctly", async () => {
+    test("Check that the Footer text renders correctly", async () => {
         render(
             <Footer />
         );
-        await screen.findByText(/This is a sample webapp using React with a Spring Boot backend./);
+        await screen.findByText(/This is a work in progress React webapp for a UCSB Software Licensing Page./);
     });
 });
 

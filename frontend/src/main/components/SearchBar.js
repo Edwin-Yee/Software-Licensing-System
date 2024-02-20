@@ -36,7 +36,7 @@ function SearchBar({ placeholder, data }) {
         <div className = "search">
             <div className = "input-wrapper">
                 <FaSearch id = "search-icon"></FaSearch>
-                <input classname = "input" type="text" placeholder={placeholder} value = {wordEntered} onChange={handleFilter}></input>
+                <input className = "input" type="text" placeholder={placeholder} value = {wordEntered} onChange={handleFilter}></input>
             </div>
 
             <div className = "searchResult">
