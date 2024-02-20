@@ -57,6 +57,9 @@ If you see the following on localhost, make sure that you also have the frontend
 Failed to connect to the frontend server... On Dokku, be sure that PRODUCTION is defined.  On localhost, open a second terminal window, cd into frontend and type: npm install; npm start";
 ```
 
+To exit the process, click on the terminal where spring-boot is running and press the keys "control" and "c" at the same time. Then, click on the terminal where npm is running and press the keys "control" and "c" at the same time.
+
+
 # Getting Started on Dokku
 
 See: [/docs/dokku.md](/docs/dokku.md)
