@@ -110,11 +110,5 @@ export default function DatabaseEntryTable({
             ))}
         </div>
     );
-
-    // return <OurTable
-    //     data={database_entries}
-    //     columns={columns}
-    //     testid={testIdPrefix}
-    // />;
 };
 

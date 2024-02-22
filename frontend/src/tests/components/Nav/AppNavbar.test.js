@@ -127,28 +127,6 @@ describe("AppNavbar tests", () => {
         expect(screen.queryByTestId(/AppNavbarLocalhost/i)).toBeNull();
     });
 
-
-    test("renders the ucsbdates link correctly", async () => {
-
-        const currentUser = currentUserFixtures.userOnly;
-        const systemInfo = systemInfoFixtures.showingBoth;
-
-        const doLogin = jest.fn();
-
-        render(
-            <QueryClientProvider client={queryClient}>
-                <MemoryRouter>
-                    <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
-                </MemoryRouter>
-            </QueryClientProvider>
-        );
-
-        await screen.findByText("UCSB Dates");
-        const link = screen.getByText("UCSB Dates");
-        expect(link).toBeInTheDocument();
-        expect(link.getAttribute("href")).toBe("/ucsbdates");
-    });
-
     test("renders the database entries link correctly", async () => {
 
         const currentUser = currentUserFixtures.userOnly;
@@ -164,8 +142,8 @@ describe("AppNavbar tests", () => {
             </QueryClientProvider>
         );
 
-        await screen.findByText("Database Entries");
-        const link = screen.getByText("Database Entries");
+        await screen.findByText("Database");
+        const link = screen.getByText("Database");
         expect(link).toBeInTheDocument();
         expect(link.getAttribute("href")).toBe("/database_entries");
     });
