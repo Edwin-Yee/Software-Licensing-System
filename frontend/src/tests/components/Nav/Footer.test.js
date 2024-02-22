@@ -6,7 +6,7 @@ describe("Footer tests", () => {
         render(
             <Footer />
         );
-        await screen.findByText(/This is a work in progress React webapp for a UCSB Software Licensing Page./);
+        await screen.findByText(/This is a work in progress React web application for a UCSB Software Licensing Page./);
     });
 });
 

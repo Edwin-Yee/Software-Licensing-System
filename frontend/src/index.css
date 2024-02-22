@@ -91,6 +91,11 @@
   font-size: 18px;
 }
 
+.navigation-link {
+  color: white; /* Set your desired link color */
+  text-decoration: none; /* Remove default underline */
+}
+
 .btn:hover {
   background-color: #ddd;
 }

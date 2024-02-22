@@ -101,9 +101,29 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                         UCSB Software Licensing Page
                     </Navbar.Brand>
 
-                    <>
-                        {/* be sure that each NavDropdown has a unique id and data-testid  */}
-                    </>
+                    <Navbar.Toggle />
+                    <Nav className="me-auto">
+                        {
+                            systemInfo?.springH2ConsoleEnabled && (
+                                <>
+                                    <Nav.Link href="/h2-console">H2Console</Nav.Link>
+                                </>
+                            )
+                        }
+        
+                        {
+                            systemInfo?.showSwaggerUILink && (
+                                <>
+                                    <Nav.Link href="/swagger-ui/index.html">Swagger</Nav.Link>
+                                </>
+                            )
+                        }
+                     
+                    </Nav>
+                  <>
+                    {/* be sure that each NavDropdown has a unique id and data-testid  */}
+                  </>
+
           <Navbar.Collapse className="justify-content-between">
             <Nav className="mr-auto">
               {
@@ -117,60 +137,25 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
             {
               currentUser && currentUser.loggedIn && (
                 <>
-
-  
-                  {/*<Nav.Link as={Link} to="/ucsbdates">UCSB Dates</Nav.Link>
-                  <Nav.Link as={Link} to="/placeholder">Placeholder</Nav.Link> */}
-                  <Navbar.Toggle />
-                    <Nav className="me-auto">
-                        {/* {
-                            systemInfo?.springH2ConsoleEnabled && (
-                                <>
-                                    <Nav.Link href="/h2-console">H2Console</Nav.Link>
-                                </>
-                            )
-                        } */}
-                      <nav className = "nav-link">
-                        <Nav.Link as={Link} to="/database_entries">Database</Nav.Link>
-
-                        {/* {
-                            systemInfo?.showSwaggerUILink && (
-                                <>
-                                    <Nav.Link href="/swagger-ui/index.html">Swagger</Nav.Link>
-                                </>
-                            )
-                        } */}
-                      </nav>
-                    </Nav>
-
-        
-                    {/* 
-                    <NavItem>
-                      <Form className="d-flex">
-                        <Form.Control
-                          type="search"
-                          placeholder="Search: "
-                          className="my_search_class"
-                          aria-label="Search"
-                        />
-                        <Button variant="success">Search</Button>
-                      </Form>
-                    </NavItem> */}
-
-                    <NavItem>
+                  <div className="me-auto">
+                    <Nav.Link className="navigation-link" as={Link} to="/database_entries">Database</Nav.Link>
+                  </div>
+                  <NavItem>
+                    <div className="me-3">
                       <button className="btn shopping-cart-btn">
-                          <GiShoppingCart size={26}></GiShoppingCart>
-                        </button>
-                    </NavItem>
-                    
+                        <GiShoppingCart size={26}></GiShoppingCart>
+                      </button>
+                    </div>
+                  </NavItem>
                 </>
+                
               )
             }
             <Nav className="ml-auto">
               {
                 currentUser && currentUser.loggedIn ? (
                   <>
-                    <Navbar.Text className="me-3" as={Link} to="/profile">{currentUser.root.user.email}</Navbar.Text>
+                    <Navbar.Text className="me-3" as={Link} to="/profile">Welcome, {currentUser.root.user.email}</Navbar.Text>
                     <Button onClick={doLogout}>Log Out</Button>
                   </>
                 ) : (

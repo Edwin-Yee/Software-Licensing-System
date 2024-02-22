@@ -1,8 +1,11 @@
-/* In your CSS or Styled Components */
-.nav-link {
-    color: white; /* Set your desired link color */
-    text-decoration: none; /* Remove default underline */
+In your CSS or Styled Components
+
+/*
+.navigation-link {
+    color: white; 
+    text-decoration: none; 
   }
+*/
 
 /* .btn {
   margin-right: 20px;
