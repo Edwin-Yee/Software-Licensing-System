@@ -35,6 +35,15 @@ will likely see an error such as:
 
 # Getting Started on localhost
 
+* Ensure that Java and Maven are installed locally by running
+```
+java --version
+mvn --v
+```
+
+* Step by step tutorial to install Java on Mac: https://www.youtube.com/watch?v=PQk9O03cukQ
+* Step by step tutorial to install Maven on Mac: https://www.youtube.com/watch?v=QhmE2Vzxk5g
+
 * Open *two separate terminal windows*  
 * In the first window, start up the backend with:
   ``` 
